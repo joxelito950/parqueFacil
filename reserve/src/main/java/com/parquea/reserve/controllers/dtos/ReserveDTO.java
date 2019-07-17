@@ -1,7 +1,5 @@
 package com.parquea.reserve.controllers.dtos;
 
-import com.parquea.reserve.entity.models.Reserve;
-
 public class ReserveDTO {
     private long id;
     private String name;
