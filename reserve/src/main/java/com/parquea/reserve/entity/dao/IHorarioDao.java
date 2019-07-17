@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface IHorarioDao extends CrudRepository<Horario, Long> {
 
-    @Query("select h from Horario h where c.idPadre")
+    @Query("select h from Horario h where c.idPadre = :id")
     List<Horario> findByIdPadre(long id);
 }
