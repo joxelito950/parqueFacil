@@ -1,4 +1,4 @@
-package com.parquea.reserve.entity.services;
+package com.parquea.reserve.services;
 
 import com.parquea.reserve.controllers.dtos.HorarioDTO;
 import com.parquea.reserve.entity.dao.IHorarioDao;
@@ -22,13 +22,13 @@ public class HorarioService {
         return horarioDao.findByIdPadre(id);
     }
 
-    public long saveHorario(HorarioDTO horarioDTO){
+    public long saveHorario(HorarioDTO horarioDTO) {
         Horario horario = new Horario();
         BeanUtils.copyProperties(horarioDTO, horario);
         return horarioDao.save(horario).getId();
     }
 
-    public void deleteHorarioById(long id){
+    public void deleteHorarioById(long id) {
         horarioDao.deleteById(id);
     }
 }

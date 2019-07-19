@@ -1,17 +1,17 @@
 package com.parquea.reserve.entity.models;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.repository.query.Param;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "horarios")
-public class Horario {
+public class Horario implements Serializable {
     @Id
     private Long id;
 
@@ -29,13 +29,13 @@ public class Horario {
     @Column(name = "fecha_fin")
     private Date fechaFin;
 
+    public Horario() {
+    }
+
     public Horario(String tipo, @NotNull Date fechaInicio, @NotNull Date fechaFin) {
         this.tipo = tipo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-    }
-
-    public Horario() {
     }
 
     public Long getId() {

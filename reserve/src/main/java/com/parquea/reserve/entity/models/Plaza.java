@@ -6,10 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "palzas")
-public class Plaza {
+@Table(name = "plazas")
+public class Plaza implements Serializable {
     @Id
     private long id;
 

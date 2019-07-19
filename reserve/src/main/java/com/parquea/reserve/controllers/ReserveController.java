@@ -2,7 +2,7 @@ package com.parquea.reserve.controllers;
 
 import com.parquea.reserve.controllers.dtos.ReserveDTO;
 import com.parquea.reserve.entity.models.Reserve;
-import com.parquea.reserve.entity.services.ReserveService;
+import com.parquea.reserve.services.ReserveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

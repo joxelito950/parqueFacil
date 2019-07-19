@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface IPlazaDao extends CrudRepository<Plaza, Long> {
 
-    @Query("select p from Plaza where idParqueadero = :id")
+    @Query("select p from Plaza p where idParqueadero = :id")
     List<Plaza> getPlazaByIdParqueadero(long id);
 }

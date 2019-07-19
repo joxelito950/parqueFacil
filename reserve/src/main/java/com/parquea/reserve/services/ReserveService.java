@@ -1,4 +1,4 @@
-package com.parquea.reserve.entity.services;
+package com.parquea.reserve.services;
 
 import com.parquea.reserve.controllers.dtos.ReserveDTO;
 import com.parquea.reserve.entity.dao.IReserveDao;
