@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/horarios")
+@RequestMapping("/horarios")
 public class HorarioController {
     @Autowired
     HorarioService horarioService;
@@ -21,7 +21,8 @@ public class HorarioController {
     }
 
     @PostMapping("/save")
-    public void saveParqueadero(HorarioDTO horarioDTO) { horarioService.saveHorario(horarioDTO);
+    public void saveHorario(HorarioDTO horarioDTO) {
+        horarioService.saveHorario(horarioDTO);
     }
 }
 
