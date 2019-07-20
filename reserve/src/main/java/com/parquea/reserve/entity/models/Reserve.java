@@ -1,8 +1,6 @@
 package com.parquea.reserve.entity.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -11,20 +9,27 @@ import java.io.Serializable;
 @Table(name = "reservas")
 public class Reserve implements Serializable {
     @Id
+    @GeneratedValue
     private long id;
+
+    @NotNull
+    @Column(name = "id_plaza")
+    private long idPlaza;
 
     @NotEmpty
     private String name;
 
     @NotNull
-    private int dia;
-
-    public Reserve(@NotEmpty String name, @NotNull int dia) {
-        this.name = name;
-        this.dia = dia;
-    }
+    @Column(name = "id_horario")
+    private long idHorario;
 
     public Reserve() {
+    }
+
+    public Reserve(@NotNull long idPlaza, @NotEmpty String name, @NotNull long idHorario) {
+        this.idPlaza = idPlaza;
+        this.name = name;
+        this.idHorario = idHorario;
     }
 
     public long getId() {
@@ -43,11 +48,19 @@ public class Reserve implements Serializable {
         this.name = name;
     }
 
-    public int getDay() {
-        return dia;
+    public long getIdHorario() {
+        return idHorario;
     }
 
-    public void setDay(int dia) {
-        this.dia = dia;
+    public void setIdHorario(long idHorario) {
+        this.idHorario = idHorario;
+    }
+
+    public long getIdPlaza() {
+        return idPlaza;
+    }
+
+    public void setIdPlaza(long idPlaza) {
+        this.idPlaza = idPlaza;
     }
 }
