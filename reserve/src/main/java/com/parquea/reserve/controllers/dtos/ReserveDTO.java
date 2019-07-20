@@ -5,6 +5,9 @@ public class ReserveDTO {
     private HorarioDTO horario;
     private long idParqueadero;
 
+    public ReserveDTO() {
+    }
+
     public ReserveDTO(String name, HorarioDTO horario, long idParqueadero) {
         this.name = name;
         this.horario = horario;

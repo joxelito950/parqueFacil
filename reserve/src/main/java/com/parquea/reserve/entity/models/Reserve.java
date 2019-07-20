@@ -19,17 +19,12 @@ public class Reserve implements Serializable {
     @NotEmpty
     private String name;
 
-    @NotNull
-    @Column(name = "id_horario")
-    private long idHorario;
-
     public Reserve() {
     }
 
-    public Reserve(@NotNull long idPlaza, @NotEmpty String name, @NotNull long idHorario) {
+    public Reserve(@NotNull long idPlaza, @NotEmpty String name) {
         this.idPlaza = idPlaza;
         this.name = name;
-        this.idHorario = idHorario;
     }
 
     public long getId() {
@@ -46,14 +41,6 @@ public class Reserve implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public long getIdHorario() {
-        return idHorario;
-    }
-
-    public void setIdHorario(long idHorario) {
-        this.idHorario = idHorario;
     }
 
     public long getIdPlaza() {

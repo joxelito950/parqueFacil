@@ -21,12 +21,17 @@ public class Plaza implements Serializable {
     @NotEmpty
     private String ubicacion;
 
-    public Plaza(@NotNull long idParqueadero, @NotEmpty String ubicacion) {
-        this.idParqueadero = idParqueadero;
-        this.ubicacion = ubicacion;
-    }
+    @NotNull
+    @Column(name = "id_horario")
+    private long idHorario;
 
     public Plaza() {
+    }
+
+    public Plaza(@NotNull long idParqueadero, @NotEmpty String ubicacion, @NotNull long idHorario) {
+        this.idParqueadero = idParqueadero;
+        this.ubicacion = ubicacion;
+        this.idHorario = idHorario;
     }
 
     public long getId() {
@@ -51,5 +56,13 @@ public class Plaza implements Serializable {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public long getIdHorario() {
+        return idHorario;
+    }
+
+    public void setIdHorario(long idHorario) {
+        this.idHorario = idHorario;
     }
 }

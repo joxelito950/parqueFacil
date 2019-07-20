@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Table(name = "parqueaderos")
 public class Parqueadero implements Serializable {
     @Id
-    private Long id;
+    private long id;
 
     @NotEmpty
     private String nombre;
@@ -22,11 +22,11 @@ public class Parqueadero implements Serializable {
         this.nombre = nombre;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

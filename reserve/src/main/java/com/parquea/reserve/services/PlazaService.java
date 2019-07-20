@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,8 +19,12 @@ public class PlazaService {
         return plazaDao.findById(id).orElse(new Plaza());
     }
 
-    public List<Plaza> getPlazaByIdParqueadero(long id) {
+    public List<Plaza> getPlazasByIdParqueadero(long id) {
         return plazaDao.getPlazaByIdParqueadero(id);
+    }
+
+    public List<Plaza> getPlazasDisponibles(long idParqueadero, Date fechaInicial) {
+        return plazaDao.getPlazasDisponibles(idParqueadero, fechaInicial);
     }
 
     public long savePlaza(PlazaDTO plazaDTO) {
@@ -30,5 +35,9 @@ public class PlazaService {
 
     public void deletePlazaById(long id) {
         plazaDao.deleteById(id);
+    }
+
+    public void updatePlaza(Plaza plaza) {
+        plazaDao.save(plaza);
     }
 }

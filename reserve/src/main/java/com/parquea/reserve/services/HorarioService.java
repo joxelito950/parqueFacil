@@ -31,7 +31,7 @@ public class HorarioService {
         return horarioDao.save(horario).getId();
     }
 
-    private void isValidHorarioDTO(HorarioDTO horarioDTO) throws InvalidDTOException {
+    public void isValidHorarioDTO(HorarioDTO horarioDTO) throws InvalidDTOException {
         StringBuilder message = new StringBuilder();
         message.append("Horario invalido falta:");
         boolean error = false;
