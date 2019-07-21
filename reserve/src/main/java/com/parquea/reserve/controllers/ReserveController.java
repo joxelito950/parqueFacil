@@ -2,10 +2,13 @@ package com.parquea.reserve.controllers;
 
 import com.parquea.reserve.controllers.dtos.ReserveDTO;
 import com.parquea.reserve.entity.models.Reserve;
-import com.parquea.reserve.entity.services.ReserveService;
+import com.parquea.reserve.exceptions.InvalidDTOException;
+import com.parquea.reserve.exceptions.NotFoundException;
+import com.parquea.reserve.services.ReserveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.TimeLimitExceededException;
 import java.util.List;
 
 @RestController
@@ -26,8 +29,8 @@ public class ReserveController {
     }
 
     @PostMapping("/save")
-    public void saveReserve(ReserveDTO reserve) {
-        reserveService.setReserva(reserve);
+    public long saveReserve(ReserveDTO reserve) throws InvalidDTOException, NotFoundException, TimeLimitExceededException {
+        return reserveService.setReserva(reserve);
     }
 
     @DeleteMapping("/{id}")
