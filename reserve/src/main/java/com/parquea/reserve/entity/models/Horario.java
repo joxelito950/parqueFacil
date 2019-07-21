@@ -1,18 +1,16 @@
 package com.parquea.reserve.entity.models;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "horarios")
 public class Horario implements Serializable {
     @Id
+    @GeneratedValue
     private Long id;
 
     @NotNull
@@ -23,16 +21,16 @@ public class Horario implements Serializable {
 
     @NotNull
     @Column(name = "fecha_inicio")
-    private Date fechaInicio;
+    private LocalDateTime fechaInicio;
 
     @NotNull
     @Column(name = "fecha_fin")
-    private Date fechaFin;
+    private LocalDateTime fechaFin;
 
     public Horario() {
     }
 
-    public Horario(String tipo, @NotNull Date fechaInicio, @NotNull Date fechaFin) {
+    public Horario(String tipo, @NotNull LocalDateTime fechaInicio, @NotNull LocalDateTime fechaFin) {
         this.tipo = tipo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -62,19 +60,19 @@ public class Horario implements Serializable {
         this.tipo = tipo;
     }
 
-    public Date getFechaInicio() {
+    public LocalDateTime getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDateTime fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDateTime getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDateTime fechaFin) {
         this.fechaFin = fechaFin;
     }
 }

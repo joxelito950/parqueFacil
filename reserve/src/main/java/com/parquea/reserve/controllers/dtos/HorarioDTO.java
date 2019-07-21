@@ -1,16 +1,19 @@
 package com.parquea.reserve.controllers.dtos;
 
-import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
 
 public class HorarioDTO {
-    private long id;
     private long idPadre;
     private String tipo;
-    private Date fechaInicio;
-    private Date fechaFin;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime fechaInicio;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime fechaFin;
 
-    public HorarioDTO(long id, long idPadre, String tipo, Date fechaInicio, Date fechaFin) {
-        this.id = id;
+    public HorarioDTO(long idPadre, String tipo, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
         this.idPadre = idPadre;
         this.tipo = tipo;
         this.fechaInicio = fechaInicio;
@@ -18,14 +21,6 @@ public class HorarioDTO {
     }
 
     public HorarioDTO() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public long getIdPadre() {
@@ -44,19 +39,19 @@ public class HorarioDTO {
         this.tipo = tipo;
     }
 
-    public Date getFechaInicio() {
+    public LocalDateTime getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDateTime fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDateTime getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDateTime fechaFin) {
         this.fechaFin = fechaFin;
     }
 }
