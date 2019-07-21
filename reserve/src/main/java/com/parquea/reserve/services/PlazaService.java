@@ -7,7 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -23,7 +23,7 @@ public class PlazaService {
         return plazaDao.getPlazaByIdParqueadero(id);
     }
 
-    public List<Plaza> getPlazasDisponibles(long idParqueadero, Date fechaInicial) {
+    public List<Plaza> getPlazasDisponibles(long idParqueadero, LocalDateTime fechaInicial) {
         return plazaDao.getPlazasDisponibles(idParqueadero, fechaInicial);
     }
 

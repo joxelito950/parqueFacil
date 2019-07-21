@@ -4,6 +4,7 @@ import com.parquea.reserve.controllers.dtos.HorarioDTO;
 import com.parquea.reserve.controllers.dtos.ReserveDTO;
 import com.parquea.reserve.entity.dao.IReserveDao;
 import com.parquea.reserve.entity.models.Parqueadero;
+import com.parquea.reserve.entity.models.Plaza;
 import com.parquea.reserve.entity.models.Reserve;
 import com.parquea.reserve.exceptions.InvalidDTOException;
 import com.parquea.reserve.exceptions.NotFoundException;
@@ -17,12 +18,14 @@ import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.naming.TimeLimitExceededException;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ReserveServiceTest {
     public static final int ID_PARQUEADERO = 1;
     public static final int ID_RESERVA = 2;
+    public static final long ID_PLAZA = 5L;
     @InjectMocks
     private ReserveService reserveService;
 
@@ -45,6 +48,7 @@ public class ReserveServiceTest {
     private HorarioDTO horario;
     private Reserve reserve;
     private Parqueadero parqueadero;
+    private Plaza plaza;
 
     @Before
     public void inicializarTest() {
@@ -52,26 +56,43 @@ public class ReserveServiceTest {
         horario = new HorarioDTO();
         reserve = new Reserve();
         parqueadero = new Parqueadero();
+        plaza = new Plaza();
     }
 
     @Test
     public void setReservaValida() throws InvalidDTOException, NotFoundException, TimeLimitExceededException {
-        long currentTime = new Date().getTime();
-        //TODO: crear utilidad para generar fechas validas, ¿posible cambiar Date a LocalDate?
-        horario.setFechaInicio(new Date(currentTime + 1));
-        horario.setFechaFin(new Date(currentTime + 9));
+        LocalDateTime currentTime = LocalDateTime.now();
+        horario.setFechaInicio(currentTime.plusHours(5L));
+        horario.setFechaFin(currentTime.plusDays(1L));
         reserveDTO.setHorario(horario);
         reserveDTO.setIdParqueadero(ID_PARQUEADERO);
         parqueadero.setId(ID_PARQUEADERO);
         reserve.setId(ID_RESERVA);
+        plaza.setId(ID_PLAZA);
+        plaza.setIdParqueadero(ID_PARQUEADERO);
+        plaza.setUbicacion("L23");
 
-
-        Mockito.when(parqueaderoService.getParqueadero(ID_PARQUEADERO)).thenReturn(parqueadero);
+        Mockito.when(plazaService.getPlazasDisponibles(ID_PARQUEADERO, horario.getFechaInicio())).thenReturn(Arrays.asList(plaza));
         Mockito.when(reserveDao.save(reserveArgumentCaptor.capture())).thenReturn(reserve);
 
         long idReserva = reserveService.setReserva(reserveDTO);
 
         Assert.assertEquals("se esperaba el id de la reserva", ID_RESERVA, idReserva);
+    }
+
+    @Test
+    public void reservaInvalidaSinPlazasDisponibles() throws InvalidDTOException, NotFoundException, TimeLimitExceededException {
+        expectedException.expect(NotFoundException.class);
+        expectedException.expectMessage("No hay plazas disponibles para el parqueadero, intenta con otro parqueadero o en un horario direfente");
+        LocalDateTime currentTime = LocalDateTime.now();
+        horario.setFechaInicio(currentTime.plusHours(5L));
+        horario.setFechaFin(currentTime.plusDays(1L));
+        reserveDTO.setHorario(horario);
+        reserveDTO.setIdParqueadero(ID_PARQUEADERO);
+        parqueadero.setId(ID_PARQUEADERO);
+        reserve.setId(ID_RESERVA);
+
+        reserveService.setReserva(reserveDTO);
     }
 
     @Test

@@ -53,7 +53,7 @@ public class ReserveService {
         List<Plaza> plazasDisponibles;
         plazasDisponibles = plazaService.getPlazasDisponibles(idParqueadero, horario.getFechaInicio());
         if (plazasDisponibles.isEmpty()) {
-            String message = String.format("No hay plazas disponibles para el parqueadero entre %tc y %tc", horario.getFechaInicio(), horario.getFechaFin());
+            String message = String.format("No hay plazas disponibles para el parqueadero, intenta con otro parqueadero o en un horario direfente");
             throw new NotFoundException(message);
         }
         return plazasDisponibles.get(0);
@@ -64,19 +64,19 @@ public class ReserveService {
         StringBuilder message = new StringBuilder();
         message.append("Reserva invalida:\n");
         boolean error = false;
-        if (DateUtils.isAfterTime(horario.getFechaInicio())) {
+        if (!DateUtils.esMayorALaFechaActual(horario.getFechaInicio())) {
             message.append("La fecha de inicio debe ser mayor a la fecha actual\n");
             error = true;
         }
-        if (DateUtils.isAfterTime(horario.getFechaFin())) {
+        if (!DateUtils.esMayorALaFechaActual(horario.getFechaFin())) {
             message.append("La fecha de fin debe ser mayor a la fecha actual\n");
             error = true;
         }
-        if (DateUtils.isAfterTime(horario.getFechaInicio(), horario.getFechaFin())) {
+        if (!DateUtils.inicialEsMayorAFinal(horario.getFechaInicio(), horario.getFechaFin())) {
             message.append("La fecha de inicio debe ser mayor a la fecha fin\n");
             error = true;
         }
-        if(error){
+        if (error) {
             throw new TimeLimitExceededException(message.toString());
         }
     }
