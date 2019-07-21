@@ -21,9 +21,8 @@ public class Plaza implements Serializable {
     @NotEmpty
     private String ubicacion;
 
-    @NotNull
     @Column(name = "id_horario")
-    private long idHorario;
+    private Long idHorario;
 
     public Plaza() {
     }

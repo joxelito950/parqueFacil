@@ -1,12 +1,16 @@
 package com.parquea.reserve.controllers.dtos;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 public class HorarioDTO {
     private long idPadre;
     private String tipo;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime fechaInicio;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime fechaFin;
 
     public HorarioDTO(long idPadre, String tipo, LocalDateTime fechaInicio, LocalDateTime fechaFin) {

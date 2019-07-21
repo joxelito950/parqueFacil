@@ -65,15 +65,15 @@ public class ReserveService {
         message.append("Reserva invalida:\n");
         boolean error = false;
         if (!DateUtils.esMayorALaFechaActual(horario.getFechaInicio())) {
-            message.append("La fecha de inicio debe ser mayor a la fecha actual\n");
+            message.append("La fecha de inicio debe ser mayor a la fecha actual.\n");
             error = true;
         }
         if (!DateUtils.esMayorALaFechaActual(horario.getFechaFin())) {
-            message.append("La fecha de fin debe ser mayor a la fecha actual\n");
+            message.append("La fecha de fin debe ser mayor a la fecha actual.\n");
             error = true;
         }
         if (!DateUtils.inicialEsMayorAFinal(horario.getFechaInicio(), horario.getFechaFin())) {
-            message.append("La fecha de inicio debe ser mayor a la fecha fin\n");
+            message.append("La fecha de inicio debe ser mayor a la fecha fin.\n");
             error = true;
         }
         if (error) {
@@ -86,11 +86,11 @@ public class ReserveService {
         message.append("Reserva invalida falta:\n");
         boolean error = false;
         if (null == reserveDTO) {
-            message.append("Todos los datos\n");
+            message.append("Todos los datos.\n");
             throw new InvalidDTOException(message.toString());
         }
         if (!ValidationUtils.isValidId(reserveDTO.getIdParqueadero())) {
-            message.append("El id del parqueadero\n");
+            message.append("El id del parqueadero.\n");
             error = true;
         }
         if (error) {

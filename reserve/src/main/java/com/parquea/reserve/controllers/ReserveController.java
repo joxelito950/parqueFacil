@@ -29,8 +29,8 @@ public class ReserveController {
     }
 
     @PostMapping("/save")
-    public void saveReserve(ReserveDTO reserve) throws InvalidDTOException, NotFoundException, TimeLimitExceededException {
-        reserveService.setReserva(reserve);
+    public long saveReserve(ReserveDTO reserve) throws InvalidDTOException, NotFoundException, TimeLimitExceededException {
+        return reserveService.setReserva(reserve);
     }
 
     @DeleteMapping("/{id}")
