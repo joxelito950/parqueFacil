@@ -13,7 +13,7 @@ export class ParqueaderosServiceService {
     public http: HttpClient
   ) { }
 
-  getAllParqueaderos(): Observable<HttpResponse<Parqueadero[]>> {
-    return this.http.get<any>('http://localhost:8080/parqueaderos/all');
+  getAllParqueaderos(): Observable<Parqueadero[]> {
+    return this.http.get<Parqueadero[]>('http://localhost:8080/parqueaderos/all');
   }
 }

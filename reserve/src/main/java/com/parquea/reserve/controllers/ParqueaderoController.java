@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/parqueadero")
+@RequestMapping("/parqueaderos")
 public class ParqueaderoController {
     @Autowired
     private ParqueaderoService parqueaderoService;
 
+    @CrossOrigin
     @GetMapping("/all")
     public List<Parqueadero> getAll() {
         return parqueaderoService.getAllParqueaderos();
@@ -23,10 +24,5 @@ public class ParqueaderoController {
     @GetMapping("/{id}")
     public Parqueadero getParqueadero(@PathVariable(value = "id") long id) throws NotFoundException {
         return parqueaderoService.getParqueadero(id);
-    }
-
-    @PostMapping("/save")
-    public void saveParqueadero(ParqueaderoDTO parqueaderoDTO) {
-        parqueaderoService.saveParqueadero(parqueaderoDTO);
     }
 }
