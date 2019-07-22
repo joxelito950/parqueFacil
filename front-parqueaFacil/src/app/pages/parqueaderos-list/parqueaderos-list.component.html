@@ -1,18 +1,2 @@
-<div class="row">
-  <div class="col s12">
-    <div class="row">
-      <div class="input-field col s12">
-        <i class="material-icons prefix">menu</i>
-        <input type="text" id="autocomplete-input" class="autocomplete">
-        <label for="autocomplete-input">Parqueaderos</label>
-      </div>
-      <div class="col s12">
-          <ul class="list-group">
-             <li class="list-group-item" *ngFor="let parqueadero of list">
-               {{ parqueadero.nombre }}
-             </li>
-          </ul>
-      </div>
-    </div>
-  </div>
-</div>
+<ng-select placeholder="Parqueaderos" [items]="parqueaderos" bindLabel="nombre" [loading]="cargandoParqueaderos">
+</ng-select>

@@ -10,12 +10,12 @@ import { Parqueadero } from 'src/app/compartido/models/Parqueadero';
   providers: [ParqueaderosServiceService]
 })
 export class ParqueaderosListComponent implements OnInit {
-
   public parqueaderos: Parqueadero[]
   public parqueaderosCopy: Parqueadero[]
+  public cargandoParqueaderos: boolean
 
   constructor(
-    public listParqueaderos: ParqueaderosServiceService
+    public listParqueaderosService: ParqueaderosServiceService
   ) { }
 
   ngOnInit() {
@@ -23,13 +23,16 @@ export class ParqueaderosListComponent implements OnInit {
   }
 
   getList(): void {
-    this.listParqueaderos.getAllParqueaderos().subscribe(
+    this.cargandoParqueaderos = true;
+    this.listParqueaderosService.getAllParqueaderos().subscribe(
       response => {
         this.parqueaderos = response;
         this.parqueaderosCopy = response;
+        this.cargandoParqueaderos = false;
       },
       error => {
         console.error(error);
+        this.cargandoParqueaderos = false;
       }
     );
   }
