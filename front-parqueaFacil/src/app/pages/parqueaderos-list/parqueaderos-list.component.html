@@ -1,0 +1,4 @@
+<ng-select placeholder="Parqueaderos" notFoundText="No hay parqueaderos disponibles" [items]="parqueaderos" bindLabel="nombre" [loading]="cargandoParqueaderos"
+  bindValue="id" 
+  (change)="onChange($event)">
+</ng-select>
