@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ParqueaderosServiceService } from 'src/app/core/services/parqueaderos-service.service';
 import { Parqueadero } from 'src/app/compartido/models/Parqueadero';
 import { HorariosServicesService } from 'src/app/core/services/horarios-services.service';
+import { ReserveServiceService } from '../../core/services/reserve-service.service';
 import { Horario } from 'src/app/compartido/models/Horario';
 
 @Component({
@@ -12,6 +14,7 @@ import { Horario } from 'src/app/compartido/models/Horario';
 })
 export class ParqueaderoDetailComponent implements OnInit {
 
+  public myForm: FormGroup;
   public idParqueadero: number
   public parqueadero: Parqueadero
   public cargandoParqueadero: boolean
@@ -19,21 +22,36 @@ export class ParqueaderoDetailComponent implements OnInit {
   public horarios: Horario[]
   public cargandoHorario: boolean
   public errorHorario: String
+  public errorReserva: String
 
   constructor(
     private route: ActivatedRoute,
+    public form: FormBuilder,
     private parqueaderoService: ParqueaderosServiceService,
-    private horarioServices: HorariosServicesService
+    private horarioServices: HorariosServicesService,
+    private reserveService: ReserveServiceService
   ) { }
 
   ngOnInit() {
     this.getIdParam();
+    this.reserveFrom();
     this.getParqueadero();
     this.getHorarios();
   }
 
   getIdParam(): void {
     this.idParqueadero = +this.route.snapshot.paramMap.get('id');
+  }
+
+  public reserveFrom(): void {
+    this.myForm = this.form.group({
+      fechaInicial: ['', [
+        Validators.required,
+      ]],
+      fechaFin: ['', [
+        Validators.required
+      ]]
+    });
   }
 
   getParqueadero(): void {
@@ -63,6 +81,33 @@ export class ParqueaderoDetailComponent implements OnInit {
       (error) => {
         this.errorHorario = error.error.message;
         this.cargandoHorario = false;
+      }
+    );
+  }
+
+  onSubmit(): void {
+    this.errorReserva = null;
+    const fechaInicial = this.myForm.value.fechaInicial;
+    const fechaFin = this.myForm.value.fechaFin;
+    const reserve = [
+      'horario.idPadre', this.idParqueadero,
+      'horario.precio', 4500,
+      'horario.fechaInicio', fechaInicial,
+      'horario.fechaFin', fechaFin,
+      'horario.tipo', 'reserva',
+      'idParqueadero', this.idParqueadero,
+      'name', 'prueba'
+    ];
+    console.log({reserve});
+    this.reserveService.saveReserve(reserve).subscribe(
+      response => {
+        console.log(response);
+        this.myForm.setValue({'fechaInicial': ''});
+        this.myForm.setValue({'fechaFin': ''});
+      }, 
+      error => {
+        console.error(error);
+        this.errorReserva = error.error.message;
       }
     );
   }
