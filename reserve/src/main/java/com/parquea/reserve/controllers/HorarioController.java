@@ -16,7 +16,7 @@ public class HorarioController {
     @Autowired
     HorarioService horarioService;
 
-
+    @CrossOrigin
     @GetMapping("/{id}")
     public List<Horario> getHorario(@PathVariable(value = "id") long id) throws NotFoundException {
         return horarioService.getHorariosByIdPagre(id);

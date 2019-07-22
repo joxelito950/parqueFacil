@@ -32,7 +32,6 @@ export class ParqueaderosListComponent implements OnInit {
         this.cargandoParqueaderos = false;
       },
       error => {
-        console.error(error);
         this.cargandoParqueaderos = false;
       }
     );

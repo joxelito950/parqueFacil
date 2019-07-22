@@ -1,11 +1,33 @@
 <div class="row">
-  <div class="col s12" *ngIf="!cagandoParqueadero">
+  <div class="col s12" *ngIf="!cargandoParqueadero">
     <h2>Nombre:</h2>
     <p>{{parqueadero.nombre}}</p>
+    <div class="row">
+      <div class="col s12" *ngIf="!cargandoHorario">
+        <h4>Horarios</h4>
+        <div class="row">
+          <div class="col s12 col m8 col l6">
+            <div *ngFor="let horario of horarios">
+              <div>
+                <div>De: {{horario.fechaInicio | date: 'h:mm a' }}</div>
+                <div>Hasta: {{horario.fechaFin | date: 'h:mm a' }}</div>
+                <div>Precio: {{horario.precio | currency }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12" *ngIf="cargandoHorario">
+        <h3>Cargando horarios...</h3>
+      </div>
+      <div class="col s12" *ngIf="errorHorario">
+        <p>{{errorHorario}}</p>
+      </div>
+    </div>
   </div>
   <div class="row">
-    <div class="col s12" *ngIf="cagandoParqueadero">
-      <h1>Cargando...</h1>
+    <div class="col s12" *ngIf="cargandoParqueadero">
+      <h1>Cargando datos del parqueadero...</h1>
     </div>
   </div>
   <div class="row">

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ParqueaderosServiceService } from 'src/app/core/services/parqueaderos-service.service';
 import { Parqueadero } from 'src/app/compartido/models/Parqueadero';
+import { HorariosServicesService } from 'src/app/core/services/horarios-services.service';
+import { Horario } from 'src/app/compartido/models/Horario';
 
 @Component({
   selector: 'app-parqueadero-detail',
@@ -10,33 +12,57 @@ import { Parqueadero } from 'src/app/compartido/models/Parqueadero';
 })
 export class ParqueaderoDetailComponent implements OnInit {
 
+  public idParqueadero: number
   public parqueadero: Parqueadero
-  public cagandoParqueadero: boolean
+  public cargandoParqueadero: boolean
   public errorParqueadero: boolean
+  public horarios: Horario[]
+  public cargandoHorario: boolean
+  public errorHorario: String
 
   constructor(
     private route: ActivatedRoute,
-    private parqueaderoService: ParqueaderosServiceService
+    private parqueaderoService: ParqueaderosServiceService,
+    private horarioServices: HorariosServicesService
   ) { }
 
   ngOnInit() {
+    this.getIdParam();
     this.getParqueadero();
+    this.getHorarios();
+  }
+
+  getIdParam(): void {
+    this.idParqueadero = +this.route.snapshot.paramMap.get('id');
   }
 
   getParqueadero(): void {
-    this.cagandoParqueadero = true;
+    this.cargandoParqueadero = true;
     this.errorParqueadero = false;
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.parqueaderoService.getParqueadero(id).subscribe(
+    this.parqueaderoService.getParqueadero(this.idParqueadero).subscribe(
       response => {
-        console.log(response);
         this.parqueadero = response;
-        this.cagandoParqueadero = false;
+        this.cargandoParqueadero = false;
         this.errorParqueadero = false;
       },
       error => {
-        console.error(error);
         this.errorParqueadero = true;
+      }
+    );
+  }
+
+  getHorarios(): void {
+    this.errorHorario = null;
+    this.cargandoHorario = true;
+    this.horarioServices.getHorariosById(this.idParqueadero).subscribe(
+      response => {
+        this.horarios = response;
+        this.cargandoHorario = false;
+        this.errorHorario = null;
+      },
+      (error) => {
+        this.errorHorario = error.error.message;
+        this.cargandoHorario = false;
       }
     );
   }
