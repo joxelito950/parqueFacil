@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ParqueaderosServiceService } from 'src/app/core/services/parqueaderos-service.service';
 import { Parqueadero } from 'src/app/compartido/models/Parqueadero';
 import { HorariosServicesService } from 'src/app/core/services/horarios-services.service';
@@ -12,6 +13,7 @@ import { Horario } from 'src/app/compartido/models/Horario';
 })
 export class ParqueaderoDetailComponent implements OnInit {
 
+  public myForm: FormGroup;
   public idParqueadero: number
   public parqueadero: Parqueadero
   public cargandoParqueadero: boolean
@@ -22,18 +24,31 @@ export class ParqueaderoDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    public form: FormBuilder,
     private parqueaderoService: ParqueaderosServiceService,
     private horarioServices: HorariosServicesService
   ) { }
 
   ngOnInit() {
     this.getIdParam();
+    this.reserveFrom();
     this.getParqueadero();
     this.getHorarios();
   }
 
   getIdParam(): void {
     this.idParqueadero = +this.route.snapshot.paramMap.get('id');
+  }
+
+  public reserveFrom(): void {
+    this.myForm = this.form.group({
+      fechaInicial: ['', [
+        Validators.required,
+      ]],
+      fechaFin: ['', [
+        Validators.required
+      ]]
+    });
   }
 
   getParqueadero(): void {

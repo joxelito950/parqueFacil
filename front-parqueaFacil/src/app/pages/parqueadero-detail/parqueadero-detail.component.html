@@ -25,7 +25,16 @@
         <p>{{errorHorario}}</p>
       </div>
       <div>
-        
+        <form [formGroup]="myForm">
+          <div class="col s6">
+            <div>Fecha Inicial</div>
+            <input type="datetime-local" formControlName="fechaInicial">
+          </div>
+          <div class="col s6">
+            <div>Fecha Final</div>
+            <input type="datetime-local" formControlName="fechaFin">
+          </div>
+        </form>
       </div>
     </div>
   </div>
