@@ -12,7 +12,7 @@ export class HorariosServicesService {
     private http: HttpClient
   ) { }
 
-  getHorariosById(id: number): Observable<Horario[]> {
-    return this.http.get<Horario[]>(`http://localhost:8080/horarios/${id}`);
+  getHorariosById(id: number, tipo: String): Observable<Horario[]> {
+    return this.http.get<Horario[]>(`http://localhost:8080/horarios/${tipo}/${id}`);
   }
 }

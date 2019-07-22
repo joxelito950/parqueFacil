@@ -2,6 +2,7 @@ package com.parquea.reserve.entity.models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ public class Horario implements Serializable {
     @Column(name = "id_padre")
     private Long idPadre;
 
+    @NotEmpty
     private String tipo;
 
     @NotNull
@@ -27,13 +29,16 @@ public class Horario implements Serializable {
     @Column(name = "fecha_fin")
     private LocalDateTime fechaFin;
 
+    private long precio;
+
     public Horario() {
     }
 
-    public Horario(String tipo, @NotNull LocalDateTime fechaInicio, @NotNull LocalDateTime fechaFin) {
+    public Horario(@NotEmpty String tipo, @NotNull LocalDateTime fechaInicio, @NotNull LocalDateTime fechaFin, long precio) {
         this.tipo = tipo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.precio = precio;
     }
 
     public Long getId() {
@@ -74,5 +79,13 @@ public class Horario implements Serializable {
 
     public void setFechaFin(LocalDateTime fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public long getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(long precio) {
+        this.precio = precio;
     }
 }

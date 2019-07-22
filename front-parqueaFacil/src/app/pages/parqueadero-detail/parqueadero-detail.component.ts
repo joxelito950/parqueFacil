@@ -54,7 +54,7 @@ export class ParqueaderoDetailComponent implements OnInit {
   getHorarios(): void {
     this.errorHorario = null;
     this.cargandoHorario = true;
-    this.horarioServices.getHorariosById(this.idParqueadero).subscribe(
+    this.horarioServices.getHorariosById(this.idParqueadero, "parqueadero").subscribe(
       response => {
         this.horarios = response;
         this.cargandoHorario = false;

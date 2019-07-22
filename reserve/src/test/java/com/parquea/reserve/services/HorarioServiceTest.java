@@ -48,9 +48,9 @@ public class HorarioServiceTest {
     public void getHorariosByIdPagreExist() throws NotFoundException {
 
         Optional<List<Horario>> optinalHorarios = Optional.of(Arrays.asList(horario));
-        Mockito.when(horarioDao.findByIdPadre(1L)).thenReturn(optinalHorarios);
+        Mockito.when(horarioDao.findByIdPadre("parqueadero", 1L)).thenReturn(optinalHorarios);
 
-        List<Horario> horarios = horarioService.getHorariosByIdPagre(1L);
+        List<Horario> horarios = horarioService.getHorariosByIdPagre("parqueadero", 1L);
 
         assertFalse("se espera una lista con horarios", horarios.isEmpty());
     }
@@ -60,7 +60,7 @@ public class HorarioServiceTest {
         expectedException.expect(NotFoundException.class);
         expectedException.expectMessage("No se encontraron horarios");
 
-        horarioService.getHorariosByIdPagre(1L);
+        horarioService.getHorariosByIdPagre("plaza", 1L);
     }
 
     @Test

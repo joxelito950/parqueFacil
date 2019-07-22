@@ -17,9 +17,9 @@ public class HorarioController {
     HorarioService horarioService;
 
     @CrossOrigin
-    @GetMapping("/{id}")
-    public List<Horario> getHorario(@PathVariable(value = "id") long id) throws NotFoundException {
-        return horarioService.getHorariosByIdPagre(id);
+    @GetMapping("/{tipo}/{id}")
+    public List<Horario> getHorario(@PathVariable(value = "tipo") String tipo, @PathVariable(value = "id") long id) throws NotFoundException {
+        return horarioService.getHorariosByIdPagre(tipo, id);
     }
 
     @PostMapping("/save")

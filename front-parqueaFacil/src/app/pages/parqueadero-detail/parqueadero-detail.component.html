@@ -9,6 +9,7 @@
           <div class="col s12 col m8 col l6">
             <div *ngFor="let horario of horarios">
               <div>
+                <div>{{horario.fechaInicio | date: 'EEEE' }} - {{horario.fechaFin | date: 'EEEE' }}</div>
                 <div>De: {{horario.fechaInicio | date: 'h:mm a' }}</div>
                 <div>Hasta: {{horario.fechaFin | date: 'h:mm a' }}</div>
                 <div>Precio: {{horario.precio | currency }}</div>
