@@ -28,6 +28,7 @@ public class ReserveController {
         return reserveService.getReserveById(id);
     }
 
+    @CrossOrigin
     @PostMapping("/save")
     public long saveReserve(ReserveDTO reserve) throws InvalidDTOException, NotFoundException, TimeLimitExceededException {
         return reserveService.setReserva(reserve);

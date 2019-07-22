@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ParqueaderosServiceService } from 'src/app/core/services/parqueaderos-service.service';
 import { Parqueadero } from 'src/app/compartido/models/Parqueadero';
 import { HorariosServicesService } from 'src/app/core/services/horarios-services.service';
+import { ReserveServiceService } from '../../core/services/reserve-service.service';
 import { Horario } from 'src/app/compartido/models/Horario';
 
 @Component({
@@ -21,12 +22,14 @@ export class ParqueaderoDetailComponent implements OnInit {
   public horarios: Horario[]
   public cargandoHorario: boolean
   public errorHorario: String
+  public errorReserva: String
 
   constructor(
     private route: ActivatedRoute,
     public form: FormBuilder,
     private parqueaderoService: ParqueaderosServiceService,
-    private horarioServices: HorariosServicesService
+    private horarioServices: HorariosServicesService,
+    private reserveService: ReserveServiceService
   ) { }
 
   ngOnInit() {
@@ -83,6 +86,29 @@ export class ParqueaderoDetailComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.warn(this.myForm.value);
+    this.errorReserva = null;
+    const fechaInicial = this.myForm.value.fechaInicial;
+    const fechaFin = this.myForm.value.fechaFin;
+    const reserve = [
+      'horario.idPadre', this.idParqueadero,
+      'horario.precio', 4500,
+      'horario.fechaInicio', fechaInicial,
+      'horario.fechaFin', fechaFin,
+      'horario.tipo', 'reserva',
+      'idParqueadero', this.idParqueadero,
+      'name', 'prueba'
+    ];
+    console.log({reserve});
+    this.reserveService.saveReserve(reserve).subscribe(
+      response => {
+        console.log(response);
+        this.myForm.setValue({'fechaInicial': ''});
+        this.myForm.setValue({'fechaFin': ''});
+      }, 
+      error => {
+        console.error(error);
+        this.errorReserva = error.error.message;
+      }
+    );
   }
 }
