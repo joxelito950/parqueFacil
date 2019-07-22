@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ParqueaderosServiceService } from '../../core/services/parqueaderos-service.service';
 import { Parqueadero } from 'src/app/compartido/models/Parqueadero';
@@ -14,6 +15,8 @@ export class ParqueaderosListComponent implements OnInit {
   public cargandoParqueaderos: boolean
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     public listParqueaderosService: ParqueaderosServiceService
   ) { }
 
@@ -35,8 +38,8 @@ export class ParqueaderosListComponent implements OnInit {
     );
   }
 
-  onChange($event) {
-    console.log($event.id);
+  onChange(event) {
+    this.router.navigate(['../parqueadero', event.id], { relativeTo: this.route });
   }
 
 }

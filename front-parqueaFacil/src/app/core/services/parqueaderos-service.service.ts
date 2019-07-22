@@ -10,10 +10,14 @@ import { Parqueadero } from 'src/app/compartido/models/Parqueadero';
 export class ParqueaderosServiceService {
 
   constructor(
-    public http: HttpClient
+    private http: HttpClient
   ) { }
 
   getAllParqueaderos(): Observable<Parqueadero[]> {
     return this.http.get<Parqueadero[]>('http://localhost:8080/parqueaderos/all');
+  }
+
+  getParqueadero(id: number): Observable<Parqueadero> {
+    return this.http.get<Parqueadero>(`http://localhost:8080/parqueaderos/${id}`);
   }
 }

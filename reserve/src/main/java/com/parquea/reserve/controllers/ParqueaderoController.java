@@ -1,6 +1,5 @@
 package com.parquea.reserve.controllers;
 
-import com.parquea.reserve.controllers.dtos.ParqueaderoDTO;
 import com.parquea.reserve.entity.models.Parqueadero;
 import com.parquea.reserve.exceptions.NotFoundException;
 import com.parquea.reserve.services.ParqueaderoService;
@@ -9,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/parqueaderos")
 public class ParqueaderoController {
     @Autowired
     private ParqueaderoService parqueaderoService;
 
-    @CrossOrigin
     @GetMapping("/all")
     public List<Parqueadero> getAll() {
         return parqueaderoService.getAllParqueaderos();

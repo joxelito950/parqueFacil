@@ -1,3 +1,17 @@
-<p>
-  parqueadero-detail works!
-</p>
+<div class="row">
+  <div class="col s12" *ngIf="!cagandoParqueadero">
+    <h2>Nombre:</h2>
+    <p>{{parqueadero.nombre}}</p>
+  </div>
+  <div class="row">
+    <div class="col s12" *ngIf="cagandoParqueadero">
+      <h1>Cargando...</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12" *ngIf="errorParqueadero">
+      <h1>Tenemos problemas</h1>
+      <p>Ocurrio un error cargando la información del parqueadero</p>
+    </div>
+  </div>
+</div>
