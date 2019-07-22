@@ -25,7 +25,7 @@
         <p>{{errorHorario}}</p>
       </div>
       <div>
-        <form [formGroup]="myForm">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
           <div class="col s6">
             <div>Fecha Inicial</div>
             <input type="datetime-local" formControlName="fechaInicial">
@@ -34,6 +34,7 @@
             <div>Fecha Final</div>
             <input type="datetime-local" formControlName="fechaFin">
           </div>
+          <button type="submit" [disabled]="!myForm.valid">Reservar</button>
         </form>
       </div>
     </div>

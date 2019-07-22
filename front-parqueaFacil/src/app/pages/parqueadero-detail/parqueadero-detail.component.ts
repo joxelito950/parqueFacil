@@ -81,4 +81,8 @@ export class ParqueaderoDetailComponent implements OnInit {
       }
     );
   }
+
+  onSubmit(): void {
+    console.warn(this.myForm.value);
+  }
 }
