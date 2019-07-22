@@ -12,15 +12,16 @@ public class HorarioDTO {
     private LocalDateTime fechaInicio;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime fechaFin;
+    private long precio;
 
-    public HorarioDTO(long idPadre, String tipo, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
-        this.idPadre = idPadre;
+    public HorarioDTO() {
+    }
+
+    public HorarioDTO(String tipo, LocalDateTime fechaInicio, LocalDateTime fechaFin, long precio) {
         this.tipo = tipo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-    }
-
-    public HorarioDTO() {
+        this.precio = precio;
     }
 
     public long getIdPadre() {
@@ -53,5 +54,13 @@ public class HorarioDTO {
 
     public void setFechaFin(LocalDateTime fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public long getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(long precio) {
+        this.precio = precio;
     }
 }

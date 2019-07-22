@@ -22,8 +22,8 @@ public class HorarioService {
         return horarioDao.findById(id).orElse(new Horario());
     }
 
-    public List<Horario> getHorariosByIdPagre(long id) throws NotFoundException {
-        Optional<List<Horario>> optionalHorarios = horarioDao.findByIdPadre(id);
+    public List<Horario> getHorariosByIdPagre(String tipo, long id) throws NotFoundException {
+        Optional<List<Horario>> optionalHorarios = horarioDao.findByIdPadre(tipo, id);
         if (optionalHorarios.isPresent()) {
             return optionalHorarios.get();
         } else

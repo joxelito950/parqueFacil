@@ -10,6 +10,6 @@ import java.util.Optional;
 
 public interface IHorarioDao extends CrudRepository<Horario, Long> {
 
-    @Query("select h from Horario h where h.idPadre = :id")
-    Optional<List<Horario>> findByIdPadre(@Param("id") long id);
+    @Query("select h from Horario h where h.idPadre = :id and h.tipo = :tipo")
+    Optional<List<Horario>> findByIdPadre(@Param("tipo") String tipo, @Param("id") long id);
 }
