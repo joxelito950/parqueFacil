@@ -11,7 +11,6 @@ import { Parqueadero } from 'src/app/compartido/models/Parqueadero';
 })
 export class ParqueaderosListComponent implements OnInit {
   public parqueaderos: Parqueadero[]
-  public parqueaderosCopy: Parqueadero[]
   public cargandoParqueaderos: boolean
 
   constructor(
@@ -27,7 +26,6 @@ export class ParqueaderosListComponent implements OnInit {
     this.listParqueaderosService.getAllParqueaderos().subscribe(
       response => {
         this.parqueaderos = response;
-        this.parqueaderosCopy = response;
         this.cargandoParqueaderos = false;
       },
       error => {
@@ -35,6 +33,10 @@ export class ParqueaderosListComponent implements OnInit {
         this.cargandoParqueaderos = false;
       }
     );
+  }
+
+  onChange($event) {
+    console.log($event.id);
   }
 
 }
