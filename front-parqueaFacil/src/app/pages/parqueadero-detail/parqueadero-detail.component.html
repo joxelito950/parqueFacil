@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col s12" *ngIf="!cargandoParqueadero">
+    <h2>Nombre:</h2>
+    <p>{{parqueadero.nombre}}</p>
+    <div class="row">
+      <div class="col s12" *ngIf="!cargandoHorario">
+        <h4>Horarios</h4>
+        <div class="row">
+          <div class="col s12 col m8 col l6">
+            <div *ngFor="let horario of horarios">
+              <div>
+                <div>{{horario.fechaInicio | date: 'EEEE' }} - {{horario.fechaFin | date: 'EEEE' }}</div>
+                <div>De: {{horario.fechaInicio | date: 'h:mm a' }}</div>
+                <div>Hasta: {{horario.fechaFin | date: 'h:mm a' }}</div>
+                <div>Precio: {{horario.precio | currency }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12" *ngIf="cargandoHorario">
+        <h3>Cargando horarios...</h3>
+      </div>
+      <div class="col s12" *ngIf="errorHorario">
+        <p>{{errorHorario}}</p>
+      </div>
+      <div>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <div class="col s6">
+            <div>Fecha Inicial</div>
+            <input type="datetime-local" formControlName="fechaInicial">
+          </div>
+          <div class="col s6">
+            <div>Fecha Final</div>
+            <input type="datetime-local" formControlName="fechaFin">
+          </div>
+          <button type="submit" [disabled]="!myForm.valid">Reservar</button>
+          <div class="alert">{{errorReserva}}</div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12" *ngIf="cargandoParqueadero">
+      <h1>Cargando datos del parqueadero...</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12" *ngIf="errorParqueadero">
+      <h1>Tenemos problemas</h1>
+      <p>Ocurrio un error cargando la información del parqueadero</p>
+    </div>
+  </div>
+</div>
