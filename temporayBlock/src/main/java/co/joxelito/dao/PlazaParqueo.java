@@ -2,14 +2,18 @@ package co.joxelito.dao;
 
 public class PlazaParqueo {
     private final int id;
-    private boolean ocupada;
+    private EstadoPlaza estado;
 
     public PlazaParqueo(int id) {
         this.id = id;
-        this.ocupada = false;
+        this.estado = EstadoPlaza.LIBRE;
     }
 
     public int getId() { return id; }
-    public boolean isOcupada() { return ocupada; }
-    public void setOcupada(boolean ocupada) { this.ocupada = ocupada; }
+    public EstadoPlaza getEstado() { return estado; }
+    public void setEstado(EstadoPlaza estado) { this.estado = estado; }
+
+    public boolean estaBloqueada() {
+        return this.estado == EstadoPlaza.BLOQUEADA;
+    }
 }
